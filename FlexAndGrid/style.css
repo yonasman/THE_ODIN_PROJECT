@@ -1,6 +1,17 @@
+/* first exercise */
+* {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    text-align: center;
+    border: 1px solid black;
+    margin: 30px 0;
+}
 .outer {
     width: 300px;
     height: 300px;
+    margin: 0 auto;
     background-color: rgb(0, 192, 245);
     display: flex;
     justify-content: center;
@@ -11,4 +22,32 @@
     background-color: blueviolet;
     width: 150px;
     height: 150px;
+}
+/* second exercise */
+.nav-wrapper {
+    display: flex;
+    background-color: pink;
+    border: 5px solid #fff;
+    height: 80px;
+    justify-content: space-between;
+    align-items: center;
+}
+.middle-container {
+    background-color: #fff;
+    color: rgb(255, 30, 0);
+    padding: 15px 25px;
+    font-weight: 900;
+    font-size: 20px;
+}
+.nav-wrapper div a {
+    text-decoration: none;
+    background-color: #fff;
+    color: blue;
+    padding: 5px;
+    margin: 10px;
+}
+.nav-wrapper div ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
 }
