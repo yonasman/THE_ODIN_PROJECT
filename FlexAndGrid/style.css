@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
 }
 h1 {
     text-align: center;
@@ -148,7 +149,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
+    /* flex-shrink: 0; */
 }
 .buttons button{
     padding: 7px 15px;
@@ -174,4 +175,146 @@ h1 {
     border: none;
     font-size: 15px;
     font-weight: 700;
+}
+/* exercise six */
+.sixth-container {
+    border: 1px solid black;
+    height: 100vh;
+}
+.sixth-container ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+.sixth-container ul a {
+    text-decoration: none;
+    color: rgb(87, 83, 83);
+}
+.header {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.middle-content img{
+    max-width: 37vw;
+}
+.middle-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+.middle-content input {
+    width: 30vw;
+    margin: 0 auto 2vh;
+    border-radius: 15px;
+    border: 1px solid rgb(207, 199, 199);
+    height: 30px;
+}
+
+.image-buttons button {
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 7px;
+}
+.footer {
+    padding: 5px;
+    background-color: #8d8b8b;
+    margin-top: 30vh;
+    display: flex;
+    justify-content: space-between;
+}
+.footer ul a {
+    color: #fff;
+}
+/* exercise 7 */
+.grail-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.grail-header {
+    background-color: #8B008B;
+    color: #fff;
+    padding: 16px;
+    font-size: 32px;
+    font-weight: 900;
+}
+.main-grail-content {
+    display: flex;
+    flex: 1;
+}
+.left-grail-links {
+    background-color: #4169E1;
+    width: 280px;
+    height: 120vh;
+    padding: 16px;
+    color: #fff;
+    flex-shrink: 0;
+}
+.left-grail-links ul {
+    list-style: none;
+    font-style: 24px;
+}
+.left-grail-links ul li {
+    margin-bottom: 16px;
+}
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 48px;
+    font-size: 12px;
+}
+.cards div {
+    width: 300px;
+    /* height: 270px; */
+    background-color: #ffffff;
+    padding: 10px;
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+}
+.grail-footer {
+    background-color: #EEEEEE;
+    display: flex;
+    color: red;
+    justify-content: center;
+    align-items: center;
+}
+/* asdfgh */
+.eight {
+    display: flex;
+    /* align-items: baseline; */
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    align-content: stretch;
+}
+.eight div {
+    height: 200px;
+    flex: 1 1 0;
+}
+.eight .eight-1 {
+    background-color: red;
+    width: 200px;
+    /* flex-grow: 0; */
+    height: 200px;
+    /* align-self: center; */
+}
+.eight .eight-2 {
+    background-color: green;
+    width: 300px;
+    height: 300px;
+}
+.eight .eight-3 {
+    background-color: blue;
+    width: 400px;
+    height: 400px;
+}
+.yo {
+    direction: rtl;
 }
