@@ -287,34 +287,19 @@ h1 {
 /* asdfgh */
 .eight {
     display: flex;
-    /* align-items: baseline; */
-    flex-direction: column;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-    align-content: stretch;
+    flex-wrap: wrap;
+    width: 50vw;
+    gap: 20px;
+    margin: auto;
 }
 .eight div {
-    height: 200px;
-    flex: 1 1 0;
-}
-.eight .eight-1 {
-    background-color: red;
+    background-color: #c0b4b4;
     width: 200px;
-    /* flex-grow: 0; */
     height: 200px;
-    /* align-self: center; */
-}
-.eight .eight-2 {
-    background-color: green;
-    width: 300px;
-    height: 300px;
-}
-.eight .eight-3 {
-    background-color: blue;
-    width: 400px;
-    height: 400px;
-}
-.yo {
-    direction: rtl;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    border: 2px solid black;
 }
