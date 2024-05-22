@@ -303,3 +303,29 @@ h1 {
     font-weight: bold;
     border: 2px solid black;
 }
+/* traversey project */
+.head-wrapper {
+    background-color: #106ead;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    color: #fff;
+    padding: 0 16px;
+    margin-top: 20px;
+}
+.item-1{
+    /* width: 100px; */
+    font-size: 30px;
+    font-weight: bold;
+}
+ul {
+    font-size: 20px;
+    /* width: 300px; */
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+}
+ul li {
+    margin-left: 20px;
+}
