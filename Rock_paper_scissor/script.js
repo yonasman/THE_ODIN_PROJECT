@@ -114,7 +114,7 @@ function playGame(e) {
     total.textContent = "";
     playAgain.textContent = "";
     playRound(getHumanChoice(userChoice),getComputerChoice());
-    if(clickCount == 5) {
+    if(clickCount > 5) {
         if(humanScore > computerScore) {
         // console.log(`You won him With total score of ${humanScore}`);
         total.textContent = `You won the computer With total score of ${humanScore}.`;
@@ -123,9 +123,10 @@ function playGame(e) {
         // console.log(`The computer won you with total score of ${computerScore}`);
         total.textContent = `The computer won you with total score of ${computerScore}.`;
         total.style.color = "red";
-        } else {
+        } else if(humanScore == computerScore) {
         // console.log(`Both scored the same score ${humanScore}`);
         total.textContent = `It's a draw with score of ${humanScore}.`
+        total.style.color = "black";
         }
         humanScore = 0;
         computerScore = 0;
