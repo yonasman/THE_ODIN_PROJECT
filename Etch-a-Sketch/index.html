@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETCH-A-SKETCH</title>
+    <!-- custom css -->
+     <link rel="stylesheet" href="./style.css">
+     <!-- favicon -->
+      <link rel="icon" type="image/png" href="./images/sketch-image.png">
+</head>
+<body>
+    <h1>ETCH-A-SKETCH</h1>
+    <div class="header-wrapper">
+        <form action="" id="form">
+            <label for="resolution">Choose Resolution:</label>
+            <input type="range" id="resolution" min="1" max="100" value="5">
+            <label for="colorPicker">Pick Color:</label>
+            <input type="color" id="colorPicker">
+            <button type="submit" id="btn">Reset</button>
+        </form>
+        <button id="clearBtn">Grid off</button>
+    </div>
+    <div id="container">
+
+    </div>
+    <script src="./app.js"></script>
+</body>
+</html>
