@@ -10,33 +10,70 @@ body {
 }
 h1 {
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     margin-top: 5px;
 }
 .calc-container {
-    margin: 10px auto;
-    width: 100px;
+    margin: 5px auto;
+    width: 110px;
+    
 } 
 .buttons {
     display: flex;
     flex-direction: column;
-    row-gap: 0.5px;
+    row-gap: 3px;
     background-color: #162231;
+    padding: 6px;
 }
 .buttons .buttons-wrapper {
     display: flex;
     width: 100%;
-    gap: 1px;
+    gap: 3px;
 }
 .buttons .buttons-wrapper .btn {
     flex: 1;
 }
+.btn {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 10px;
+    height: 19px;
+    cursor: pointer;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.buttons-wrapper .btn:hover {
+    background-color: #d2cfcf;
+    transform: translateY(2px); /* Move button down on hover for pressed effect */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+.buttons-wrapper .equal {
+    background-color: #9de357;
+}
 /* display section */
 .display {
     background-color: #000;
-    /* border-radius: 3px; */
     height: 80px;
     width: 100%;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
+    color: #fff;
+}
+.primary-display {
+    padding-top: 45px;
+    padding-left: 98px;
+    font-size: 7px;
+    color: #d2cfcf;
+}
+.secondary-display {
+    padding-top: 3px;
+    padding-left: 80px;
+    font-size: 18px;
+}
+.colored-btn {
+    background-color: #3176b2;
+    color: #fff;
 }
