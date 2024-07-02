@@ -69,9 +69,11 @@ h1 {
     color: #d2cfcf;
 }
 .secondary-display {
-    padding-top: 3px;
-    padding-left: 80px;
+    padding-top: 13px;
+    margin-left: 97px;
     font-size: 18px;
+    
+    /* width: auto; */
 }
 .colored-btn {
     background-color: #3176b2;

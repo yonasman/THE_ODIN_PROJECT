@@ -42,8 +42,8 @@ function inverse(arg) {
 }
 
 // square
-function square(num1,num2) {
-    return num1 ** num2;
+function square(num) {
+    return num ** 2;
 }
 
 // square root
@@ -58,6 +58,8 @@ function percent(num) {
 
 // operate function
 function operate(num1, num2, operator) {
+    num1 = Number(num1);
+    num2 = Number(num2);
     switch(operator) {
         case "+":
             return sum(num1, num2);
@@ -70,9 +72,11 @@ function operate(num1, num2, operator) {
         case "1/x":
             return inverse(num1);
         case "x^2":
-            return square(num1, num2);
+            return square(num1);
         case "%":
             return percent(num1, num2);
+        case "sqrt":
+            return squareRoot(num1);
         default:
             return "Nothing to operate";
     }
@@ -84,7 +88,9 @@ let num1 = "", num2 = "", operator = "";
 let priDisplay = document.querySelector(".primary-display");
 let secDisplay = document.querySelector(".secondary-display");
 let buttons = document.querySelectorAll(".btn");
+secDisplay.style.marginLeft = "90px"
 let nowResult = 0
+let isPositive = false;
 buttons.forEach (
     (button) => {
         button.addEventListener("click", function(e) {
@@ -94,24 +100,58 @@ buttons.forEach (
             if(value === "C") {
                 num1 = "";
                 num2 = "";
+                secDisplay.style.marginLeft = "90px"
                 isFirstNum = true;
                 isSecNum = true;
                 operator = "";
                 nowResult = 0;
                 priDisplay.textContent = "";
                 secDisplay.textContent = "0";
-            } else if(value === "+" || value === "-" || value === "x" || value === "/") {
+            } else if(value === "+" || value === "-" || value === "x" || value === "/" || value === "1/x" || value === "%" || value === "x^2" || value === "sqrt" || value === "+/-") {
                 if(num1 !== "") {
                     isFirstNum = false;
                     operator = value;
-                    // console.log(num1);
-                    console.log("operator  " + operator)
-                    // priDisplay.textContent = operator;
-                    // secDisplay.textContent = operator;
+                    // inverse, square and root functionality
+                    if(operator === "1/x") {
+                        console.log(operator)
+                        nowResult = operate(num1,num2,operator);
+                        console.log("inverse now result " + nowResult)
+                        secDisplay.textContent = nowResult;
+                    } else if(operator === "%") {
+                        // console.log(operator)
+                        nowResult = operate(num1,num2,operator);
+                        secDisplay.textContent = nowResult;
+                    } else if(value === "x^2") {
+                        nowResult = operate(num1,num2,operator);
+                        console.log("inverse now result " + nowResult)
+                        secDisplay.textContent = nowResult;
+                    } else if(value === "sqrt") {
+                        nowResult = operate(num1,num2,operator);
+                        console.log("inverse now result " + nowResult)
+                        secDisplay.textContent = nowResult;
+                    } else if(value === "+/-") {
+                        isPositive = true;
+                        console.log("inside +/-" + operator)
+                        secDisplay.textContent = "-" + num1;
+                    }
+                   if(isPositive){
+                    secDisplay.textContent = "-" + num1;
+                   }
+                    // displaying the primary text
                     if(!nowResult) {
-                        priDisplay.textContent = `${num1} ${operator}`;
+                            priDisplay.textContent = `${num1} ${operator}`;
                     } else {
-                        priDisplay.textContent = `${nowResult} ${operator}`;
+                        if(operator === "1/x") {
+                            priDisplay.textContent = `1/(${num1})`
+                        } else if(operator === "x^2") {
+                            priDisplay.textContent = `sqr(${num1})`
+                        } else if(operator === "sqrt") {
+                            priDisplay.textContent = `\u221A(${num1})`
+                        } 
+                        else {
+                            priDisplay.textContent = `${nowResult} ${operator}`;
+                        }
+                        
                     }
                 }
             } else if(value === "BS") {
@@ -123,8 +163,6 @@ buttons.forEach (
                 }
                 console.log(secDisplay.textContent)
             }
-            
-            
             else if(num1 !== "" && operator !== "") {
                 //  && (value !== "+" || value !== "-" || value !== "x" || value !== "/")
                     isFirstNum = false;
@@ -141,12 +179,12 @@ buttons.forEach (
                         console.log(num1)
                         console.log(num2)
                         if(nowResult) {
-                            nowResult = operate(Number(nowResult),Number(num2),operator);
+                            nowResult = operate(Number(nowResult),num2,operator);
                             console.log("current result inside " + nowResult)
                             secDisplay.textContent = nowResult
                             
                         } else {
-                            nowResult = operate(Number(num1),Number(num2),operator);
+                            nowResult = operate(num1,num2,operator);
                             console.log("current result outside " + nowResult);
                             secDisplay.textContent = nowResult
                             // priDisplay.textContent = `${nowResult} ${operator}`
@@ -156,11 +194,24 @@ buttons.forEach (
                     // }
                 } 
                 else {    
-                    
+                
                 if (isFirstNum) {
                     num1 += value;
-                    console.log("num1  " + num1)
+                    console.log("num1  " + num1)                   
                     secDisplay.textContent = num1;
+                    if(num1.length > 1 && secDisplay.style.marginLeft >= "10px") {
+                        let currentMargin = parseInt(secDisplay.style.marginLeft);
+                        let newMargin = currentMargin - 8;
+                        secDisplay.style.marginLeft = newMargin + "px";
+                        console.log("in length" + currentMargin)
+                    }
+                    if(secDisplay.style.marginLeft <= "10px") {
+                        secDisplay.style.fontSize = "15px";
+                    }
+                    if(num1.length > 16) {
+                        secDisplay.style.overflow = "hidden";
+                    } 
+                    // console.log(secDisplay.style.marginLeft);
                 } 
                 
                 }
