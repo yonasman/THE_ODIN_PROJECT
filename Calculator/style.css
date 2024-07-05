@@ -46,7 +46,7 @@ h1 {
 }
 
 .buttons-wrapper .btn:hover {
-    background-color: #d2cfcf;
+    /* background-color: #d2cfcf; */
     transform: translateY(2px); /* Move button down on hover for pressed effect */
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
 }
@@ -63,19 +63,33 @@ h1 {
     color: #fff;
 }
 .primary-display {
-    padding-top: 45px;
-    padding-left: 98px;
+    padding-top: 44px;
+    display: flex;
+    /* justify-content: space-evenly; */
+    align-items: center;
+    padding-left: 90px;
+    overflow: hidden;
+    white-space: nowrap;
     font-size: 7px;
-    color: #d2cfcf;
+    color: #c7c5c5;
 }
 .secondary-display {
-    padding-top: 13px;
-    margin-left: 97px;
-    font-size: 18px;
-    
-    /* width: auto; */
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 10px;
+    padding-right: 4px;
+    padding-top: 5px;
+    /* overflow: hidden; */
+    white-space: nowrap;
 }
-.colored-btn {
-    background-color: #3176b2;
+.secondary-display span {
+    display: inline-block;
+    transition: transform 0.1s ease-in-out;
+}
+.percent, .clear-entry, .clear,.backspace,.divide,.multiply,.minus, .plus {
+    background-color: #057ca1;
     color: #fff;
 }
+
+

@@ -1,3 +1,9 @@
+/**
+ * 
+ * @param  {...any} args 
+ * @returns 
+ */
+
 // calculator
 // ******************************
 // functions for calculator
@@ -81,139 +87,230 @@ function operate(num1, num2, operator) {
             return "Nothing to operate";
     }
 }
-// reading the value of each button
-// ************************
-let num1 = "", num2 = "", operator = "";
-// displays
+
+// variables to store values
+let firstOperand = "";
+let secondOperand = "";
+let  currentOperator = "";
+let result = 0;
+
+// display elements
 let priDisplay = document.querySelector(".primary-display");
 let secDisplay = document.querySelector(".secondary-display");
 let buttons = document.querySelectorAll(".btn");
-secDisplay.style.marginLeft = "90px"
-let nowResult = 0
-let isPositive = false;
-buttons.forEach (
-    (button) => {
-        button.addEventListener("click", function(e) {
-            let value = e.target.value;
-            isFirstNum = true;
-            isSecNum = false;
-            if(value === "C") {
-                num1 = "";
-                num2 = "";
-                secDisplay.style.marginLeft = "90px"
-                isFirstNum = true;
-                isSecNum = true;
-                operator = "";
-                nowResult = 0;
-                priDisplay.textContent = "";
-                secDisplay.textContent = "0";
-            } else if(value === "+" || value === "-" || value === "x" || value === "/" || value === "1/x" || value === "%" || value === "x^2" || value === "sqrt" || value === "+/-") {
-                if(num1 !== "") {
-                    isFirstNum = false;
-                    operator = value;
-                    // inverse, square and root functionality
-                    if(operator === "1/x") {
-                        console.log(operator)
-                        nowResult = operate(num1,num2,operator);
-                        console.log("inverse now result " + nowResult)
-                        secDisplay.textContent = nowResult;
-                    } else if(operator === "%") {
-                        // console.log(operator)
-                        nowResult = operate(num1,num2,operator);
-                        secDisplay.textContent = nowResult;
-                    } else if(value === "x^2") {
-                        nowResult = operate(num1,num2,operator);
-                        console.log("inverse now result " + nowResult)
-                        secDisplay.textContent = nowResult;
-                    } else if(value === "sqrt") {
-                        nowResult = operate(num1,num2,operator);
-                        console.log("inverse now result " + nowResult)
-                        secDisplay.textContent = nowResult;
-                    } else if(value === "+/-") {
-                        isPositive = true;
-                        console.log("inside +/-" + operator)
-                        secDisplay.textContent = "-" + num1;
-                    }
-                   if(isPositive){
-                    secDisplay.textContent = "-" + num1;
-                   }
-                    // displaying the primary text
-                    if(!nowResult) {
-                            priDisplay.textContent = `${num1} ${operator}`;
-                    } else {
-                        if(operator === "1/x") {
-                            priDisplay.textContent = `1/(${num1})`
-                        } else if(operator === "x^2") {
-                            priDisplay.textContent = `sqr(${num1})`
-                        } else if(operator === "sqrt") {
-                            priDisplay.textContent = `\u221A(${num1})`
-                        } 
-                        else {
-                            priDisplay.textContent = `${nowResult} ${operator}`;
-                        }
-                        
-                    }
-                }
-            } else if(value === "BS") {
-                secDisplay.textContent = secDisplay.textContent.slice(0,-1);
-                num1 = secDisplay.textContent;
-                if(secDisplay.textContent === "") {
-                    secDisplay.textContent = 0;
-                    num1 = "";
-                }
-                console.log(secDisplay.textContent)
-            }
-            else if(num1 !== "" && operator !== "") {
-                //  && (value !== "+" || value !== "-" || value !== "x" || value !== "/")
-                    isFirstNum = false;
-                    isSecNum = true;
-                    console.log("number 2 is here")
-                    // ******
-                    // if(!isFirstNum && isSecNum) {
-                        num2 = value;
-                        console.log("num2  " + num2)
-                        secDisplay.textContent = num2;
-                    // }
-                    // let sum = 0;
-                    // if(!isFirstNum && isSecNum) {
-                        console.log(num1)
-                        console.log(num2)
-                        if(nowResult) {
-                            nowResult = operate(Number(nowResult),num2,operator);
-                            console.log("current result inside " + nowResult)
-                            secDisplay.textContent = nowResult
-                            
-                        } else {
-                            nowResult = operate(num1,num2,operator);
-                            console.log("current result outside " + nowResult);
-                            secDisplay.textContent = nowResult
-                            // priDisplay.textContent = `${nowResult} ${operator}`
-                        }
-                       
-                    //    num1 = num2;
-                    // }
-                } 
-                else {    
-                
-                if (isFirstNum) {
-                    num1 += value;
-                    console.log("num1  " + num1)                   
-                    secDisplay.textContent = num1;
-                    if(num1.length > 1 && secDisplay.style.marginLeft >= "10px") {
-                        let currentMargin = parseInt(secDisplay.style.marginLeft);
-                        let newMargin = currentMargin - 8;
-                        secDisplay.style.marginLeft = newMargin + "px";
-                        console.log("in length" + currentMargin)
-                    }
-                    if(secDisplay.style.marginLeft <= "10px") {
-                        secDisplay.style.fontSize = "15px";
-                    }
-                    if(num1.length > 16) {
-                        secDisplay.style.overflow = "hidden";
-                    } 
-                    // console.log(secDisplay.style.marginLeft);
-                } 
-                
-                }
-        })
-} )
+
+// listening to buttons
+buttons.forEach(button => button.addEventListener("click", function(e) {
+    let value = e.target.value;
+
+    // switch to target button
+    switch(value) {
+            case "C":
+                clearCalculator();
+                break;
+            case "+":
+            case "-":
+            case "x":
+            case "/":
+                handleOperator(value);
+                break;
+            case "=":
+                calculateResult();
+                break;
+            case "+/-":
+                handleOperator(value);
+                handleNegation();
+                handleUnaryOperator(value);
+                break;
+            case "1/x":
+                handleUnaryOperator(value);
+                handleUnaryOperation(value);
+                break;
+            case "%":
+                handleUnaryOperation(value);
+                break;
+            case "x^2":
+                handleUnaryOperator(value);
+                handleUnaryOperation(value);
+                break;
+            case "sqrt":
+                handleUnaryOperator(value);
+                handleUnaryOperation(value);
+                break;
+            case ".":
+                handleDecimal(value);
+                break;
+            case "BS":
+                handleBackSpace();
+                break;
+            case "CE":
+                clearEntry();
+                break;
+            default:
+                handleNumber(value);
+                break;
+    }
+}))
+
+// handle operator
+function handleOperator(operator) {
+    if(firstOperand !== "" && secondOperand === "") {
+        currentOperator = operator;
+        updatePrimaryDisplay(`${firstOperand} ${operator} ${secondOperand}`);
+    } else if(firstOperand !== "" && secondOperand !== "") {
+        currentOperator = operator;
+        calculateResult();
+        updatePrimaryDisplay(`${result} ${operator}`);
+    }
+}
+
+// handling unary operation
+function handleUnaryOperation(operator) {
+    if(!result) {
+        result = operate(firstOperand,null,operator);
+    } else {
+        result = operate(result, null,operator);
+    }
+    updateSecondaryDisplay(result);
+}
+
+// handling unary operators
+function handleUnaryOperator(operator) {
+    switch(operator) {
+        case "1/x":
+            updatePrimaryDisplay(`1 /(${firstOperand})`);
+            break;
+        case "x^2":
+            updatePrimaryDisplay(`sqr(${firstOperand})`);
+            break;
+        case "sqrt":
+            updatePrimaryDisplay(`sqrt(${firstOperand})`);
+            break;
+        case "+/-":
+            updatePrimaryDisplay("");
+            break;
+    }
+}
+
+// handling negation
+function handleNegation() {
+    firstOperand = -1 * firstOperand;
+    updateSecondaryDisplay(firstOperand);
+}
+// removing commas
+function removeCommas(number) {
+    // Remove commas for proper calculations
+    return number.replace(/,/g, '');
+}
+
+// number format
+function formatNumberWithComma(number) {
+    return number.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// handle numbers
+function handleNumber(number) {
+    if(currentOperator === "") {
+        firstOperand = removeCommas(firstOperand);
+        firstOperand += number;
+        firstOperand = formatNumberWithComma(firstOperand);
+        updateSecondaryDisplay(firstOperand);
+    } else {
+        secondOperand += number;
+        updateSecondaryDisplay(secondOperand);
+    }
+}
+
+// calculate the result
+function calculateResult() {
+    let num1 = parseFloat(firstOperand);
+    let num2 = parseFloat(secondOperand);
+
+    switch(currentOperator) {
+        case "+":
+            result = operate(num1, num2, "+");
+            break;
+        case "-":
+            result = operate(num1, num2, "-");
+            break;
+        case "x":
+            result = operate(num1, num2, "x");
+            break;
+        case "/":
+            result = operate(num1, num2, "/");
+            break;
+        default:
+            result = firstOperand;
+            break;
+    }
+    updateSecondaryDisplay(result);
+    firstOperand = result.toString();
+    secondOperand = "";
+    currentOperator = "";
+}
+
+// clearing the display
+function clearCalculator() {
+    firstOperand = "";
+    secondOperand = "";
+    currentOperator = "";
+    result = 0;
+    updatePrimaryDisplay("");
+    updateSecondaryDisplay("0");
+}
+
+// clearing the entry
+function clearEntry() {
+    firstOperand = "";
+    secondOperand = "";
+    updateSecondaryDisplay("0");
+}
+
+// handling backspace
+function handleBackSpace() {
+    if(result) {
+        return;
+    } else if(currentOperator) {
+        secondOperand = removeCommas(secondOperand);
+        secondOperand = secondOperand.slice(0,-1);
+        secondOperand = formatNumberWithComma(secondOperand);
+        secondOperand ? updateSecondaryDisplay(secondOperand):updateSecondaryDisplay("0");
+    } else {
+        firstOperand = removeCommas(firstOperand);
+        firstOperand = firstOperand.slice(0,-1);
+        firstOperand = formatNumberWithComma(firstOperand);
+        firstOperand ? updateSecondaryDisplay(firstOperand):updateSecondaryDisplay("0");
+    }
+}
+// handling period
+function handleDecimal(operand) {
+    if(!firstOperand.includes(".")) {
+        firstOperand += operand;
+        updateSecondaryDisplay(firstOperand);
+    }
+}
+
+// display methods
+function updatePrimaryDisplay(value) {
+    priDisplay.textContent = value;
+}
+
+function updateSecondaryDisplay(value) {
+    const baseFontSize = 15; // Initial font size
+    let decrementFactor = 1; // Font size decrement factor per character over 13
+
+    // Convert value to string to handle length check uniformly
+    value = value.toString();
+
+    // Adjust font size based on the length of the value
+    if (value.length > 15) {
+        const extraCharacters = value.length - 13;
+        const reducedFontSize = baseFontSize - (extraCharacters * decrementFactor);
+        secDisplay.style.fontSize = Math.max(reducedFontSize, 9) + "px"; // Ensure font size doesn't go below 10px
+    } else {
+        secDisplay.style.fontSize = baseFontSize + "px"; // Default font size
+    }
+
+    secDisplay.textContent = value;
+}
+
