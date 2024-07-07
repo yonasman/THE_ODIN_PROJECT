@@ -53,6 +53,9 @@ h1 {
 .buttons-wrapper .equal {
     background-color: #9de357;
 }
+.buttons-wrapper .equal:hover {
+    background-color: #bcf186;
+}
 /* display section */
 .display {
     background-color: #000;

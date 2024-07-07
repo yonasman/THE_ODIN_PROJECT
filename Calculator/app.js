@@ -173,18 +173,28 @@ function handleUnaryOperation(operator) {
     }
     updateSecondaryDisplay(result);
 }
+// Initialize a counter for nesting
+let sqrCounter = 0;
+let sqrtCounter = 0;
 
 // handling unary operators
+let updatedDisplay = "";
 function handleUnaryOperator(operator) {
     switch(operator) {
         case "1/x":
             updatePrimaryDisplay(`1 /(${firstOperand})`);
             break;
         case "x^2":
-            updatePrimaryDisplay(`sqr(${firstOperand})`);
+            sqrCounter++;
+            updatedDisplay = nestFunction("sqr",firstOperand,sqrCounter);
+            updatePrimaryDisplay(updatedDisplay);
+            updatePadding();
             break;
         case "sqrt":
-            updatePrimaryDisplay(`sqrt(${firstOperand})`);
+            sqrtCounter++;
+            updatedDisplay = nestFunction("sqrt",firstOperand,sqrtCounter);
+            updatePrimaryDisplay(updatedDisplay);
+            updatePadding();
             break;
         case "+/-":
             updatePrimaryDisplay("");
@@ -192,6 +202,24 @@ function handleUnaryOperator(operator) {
     }
 }
 
+// nesting function
+let nested = "";
+function nestFunction(func, operand, counter) {
+    nested = operand.toString(); 
+    for(let i = 0; i < counter;i++) {
+        nested = `${func}(${nested})`;
+    }
+    return nested;
+}
+// decreasing padding 
+let baseLeftPadding = 95;
+let paddingDecreasingFactor = 1;
+let decreaseAmount = 7;
+function updatePadding() {
+   currentPadding = (baseLeftPadding - (decreaseAmount * paddingDecreasingFactor)) + "px";
+    priDisplay.style.paddingLeft = currentPadding;
+    paddingDecreasingFactor += 1.8;
+}
 // handling negation
 function handleNegation() {
     firstOperand = -1 * firstOperand;
@@ -255,6 +283,12 @@ function clearCalculator() {
     secondOperand = "";
     currentOperator = "";
     result = 0;
+    nested = "";
+    sqrCounter = 0;
+    sqrtCounter = 0;
+    baseLeftPadding = 90;
+    paddingDecreasingFactor = 1;
+    decreaseAmount = 7;
     updatePrimaryDisplay("");
     updateSecondaryDisplay("0");
 }
@@ -303,7 +337,7 @@ function updateSecondaryDisplay(value) {
     value = value.toString();
 
     // Adjust font size based on the length of the value
-    if (value.length > 15) {
+    if (value.length > 14) {
         const extraCharacters = value.length - 13;
         const reducedFontSize = baseFontSize - (extraCharacters * decrementFactor);
         secDisplay.style.fontSize = Math.max(reducedFontSize, 9) + "px"; // Ensure font size doesn't go below 10px
