@@ -1,0 +1,14 @@
+table {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+th,td {
+    border: 1px solid black;
+    padding: 10px 20px;
+}
+/* th {
+    background-color: aquamarine;
+} */
+thead {
+    background-color: #e3e2e2;
+}
