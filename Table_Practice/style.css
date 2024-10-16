@@ -6,9 +6,12 @@ th,td {
     border: 1px solid black;
     padding: 10px 20px;
 }
-/* th {
-    background-color: aquamarine;
-} */
-thead {
-    background-color: #e3e2e2;
+.names {
+    border: 3px solid black;
+}
+th {
+    background-color: #edecec;
+}
+tr:nth-child(odd){
+    background-color: #e5e4e4;
 }
